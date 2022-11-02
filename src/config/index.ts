@@ -11,6 +11,7 @@ const config = {
       client_email: process.env.FIREBASE_CLIENT_EMAIL,
     } as ServiceAccount),
     databaseUrl: process.env.FIREBASE_DATABASE_URL,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET_URL
   },
   port: process.env.PORT || 5000,
 };

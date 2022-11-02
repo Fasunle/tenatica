@@ -13,6 +13,7 @@ You should have [nodejs](https://nodejs.org/en/) installed on your machine.
 - FIREBASE_PRIVATE_KEY
 - FIREBASE_PROJECT_ID
 - FIREBASE_CLIENT_EMAIL
+- FIREBASE_STORAGE_BUCKET_URL
 
 ## Start the server
 
