@@ -11,7 +11,7 @@ const app = express();
 admin.initializeApp(config.firebaseAdminConfig);
 
 // routes
-app.use((req, res) => {
+app.get('/', (req, res) => {
   res.send({ message: 'All good to go!' });
   return res.end();
 });
