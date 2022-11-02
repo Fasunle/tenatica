@@ -1,6 +1,7 @@
 import express from 'express';
 import admin from 'firebase-admin';
-
+import { join } from 'path';
+import favicon from 'serve-favicon';
 //
 import config from './config/index';
 
@@ -9,6 +10,10 @@ const app = express();
 
 // firebase admin
 admin.initializeApp(config.firebaseAdminConfig);
+
+// routes
+app.use(favicon(join(__dirname, '../public', 'favicon.ico')));
+app.use(express.static(join(__dirname, '../public')));
 
 // routes
 app.get('/', (req, res) => {
