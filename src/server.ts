@@ -8,6 +8,7 @@ import compression from 'compression';
 import config from './config';
 import usersRoutes from './users/user.controller';
 import shareFileRoutes from './files/share.routes';
+import errorHandler from './utils/error-handlers';
 
 // https://stackoverflow.com/questions/63744824/getting-express-default-is-not-a-function-error-when-i-run-node-server-in-a-co
 const app = express();
@@ -32,6 +33,8 @@ app.get('/', (req, res) => {
 app.use('/users', usersRoutes);
 app.use('/files', shareFileRoutes);
 
+// error handler
+app.use(errorHandler);
 app.listen(config.port, () =>
   console.log(`Server started on port ${config.port}`),
 );
