@@ -27,10 +27,10 @@ app.use('/api/public', express.static(join(__dirname, '../public')));
 app.get('/', (req, res) => {
   res.send({ message: 'All good to go!' });
   return res.end();
-} );
-// 
-app.use('/users', usersRoutes)
-app.use('/files', shareFileRoutes)
+});
+//
+app.use('/users', usersRoutes);
+app.use('/files', shareFileRoutes);
 
 app.listen(config.port, () =>
   console.log(`Server started on port ${config.port}`),
