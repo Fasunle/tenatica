@@ -14,6 +14,7 @@ const config = {
     storageBucket: process.env.FIREBASE_STORAGE_BUCKET_URL,
   },
   port: process.env.PORT || 5000,
+  environment: process.env.NODE_ENV ?? 'development',
 };
 
 export default config;
