@@ -11,7 +11,7 @@ route.post('/upload', localStorage, (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
-  for ( const file of files ) {
+  for (const file of files) {
     let destination = destinationFolder(file.filename);
     // unsupported format
     if (destination !== 'general' && file.name === 'delete') {

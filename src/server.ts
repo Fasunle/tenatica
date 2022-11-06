@@ -14,8 +14,11 @@ import errorHandler from './utils/error-handlers';
 const app = express();
 
 // firebase admin
-admin.initializeApp(config.firebaseAdminConfig);
-
+const firebaseAdmin = admin.initializeApp(config.firebaseAdminConfig);
+export const storage: any = firebaseAdmin
+  .storage()
+  .bucket(config.firebaseAdminConfig.storageBucket);
+// upload files to firebase store
 // middlewares
 app.use(cors());
 app.use(compression());
