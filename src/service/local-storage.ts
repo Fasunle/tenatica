@@ -1,5 +1,6 @@
 import multer from 'multer';
 import md5 from 'md5';
+import { join } from 'path';
 
 // the set of supported format
 const supported = new Set(['mp3', 'jpeg', 'jpg', 'txt', 'pdf', 'png']);
@@ -16,7 +17,12 @@ const storage = multer.diskStorage({
     const fileParams = file.originalname.split('.');
     const fileLength = fileParams.length;
     const extension = fileParams[fileLength - 1];
-    const rawName = fileParams.slice(0, fileLength - 1).join('');
+    const rawName = fileParams
+      .slice(0, fileLength - 1)
+      .join('')
+      .split(' ')
+      .map((word) => word.trim())
+      .join('-');
     const isSupported = supported.has(extension);
 
     const currentTime = new Date();
@@ -30,7 +36,7 @@ const storage = multer.diskStorage({
     // if not supported, flag it for deletion
     !isSupported && cb(null, 'delete');
   },
-  destination: 'public/temp',
+  destination: join(__dirname, '../../temp'),
 });
 
 const localStorage = multer({ storage }).array('files');
