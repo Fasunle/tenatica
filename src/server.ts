@@ -6,6 +6,8 @@ import cors from 'cors';
 import compression from 'compression';
 //
 import config from './config';
+import usersRoutes from './users/user.controller';
+import shareFileRoutes from './files/share.routes';
 
 // https://stackoverflow.com/questions/63744824/getting-express-default-is-not-a-function-error-when-i-run-node-server-in-a-co
 const app = express();
@@ -25,7 +27,10 @@ app.use('/api/public', express.static(join(__dirname, '../public')));
 app.get('/', (req, res) => {
   res.send({ message: 'All good to go!' });
   return res.end();
-});
+} );
+// 
+app.use('/users', usersRoutes)
+app.use('/files', shareFileRoutes)
 
 app.listen(config.port, () =>
   console.log(`Server started on port ${config.port}`),
