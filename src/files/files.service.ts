@@ -61,16 +61,15 @@ export const uploadFile = async (req, res) => {
 
 export const getAllFiles = async (req, res) => {
   const userEmail = req.query.userEmail;
-  const receiverEmail = req.query.receiverEmail;
 
-  if (!(userEmail && receiverEmail))
+  if (!userEmail)
     return res.status(400).send({
-      message: 'userEmail and receiverEmail are required',
+      message: 'userEmail are required',
       status: 400,
     });
 
   const fileModel = new FileModel();
-  const files = await fileModel.getAllFiles({ receiverEmail, userEmail });
+  const files = await fileModel.getAllFiles(userEmail);
 
   res.status(files.status).json(createDataResponse(files));
 };
