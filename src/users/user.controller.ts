@@ -1,5 +1,5 @@
 import express from 'express';
-import { isAuthenticated } from 'src/auth';
+import { isAuthenticated } from '../auth';
 import userService from './user.service';
 
 const route = express.Router();
