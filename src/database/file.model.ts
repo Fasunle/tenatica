@@ -6,8 +6,7 @@ export class FileModel {
 
   async create(item: IFile): Promise<{ data: string }> {
     try {
-      console.log({ item });
-      // const file = await this._fileModel.add(item);
+      await this._fileModel.add(item);
       return { data: 'Created 200 OK' };
     } catch (error) {
       console.log('An error has occured');
@@ -15,10 +14,9 @@ export class FileModel {
     }
   }
 
-  async getAllFiles(payload: {
-    userEmail: string;
-    receiverEmail: string;
-  }): Promise<{ files: IFile[]; status: number }> {
+  async getAllFiles(
+    email: string,
+  ): Promise<{ files: IFile[]; status: number }> {
     let files: IFile[];
 
     try {
@@ -29,10 +27,7 @@ export class FileModel {
       data.forEach((doc) => {
         const userEmail = doc.data().userEmail;
         const receiverEmail = doc.data().receiverEmail;
-        if (
-          userEmail === payload.userEmail &&
-          receiverEmail === payload.receiverEmail
-        ) {
+        if (userEmail === email || receiverEmail === email) {
           const file: IFile = {
             senderEmail: userEmail,
             receiverEmail,

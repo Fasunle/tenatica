@@ -10,6 +10,7 @@ import usersRoutes from './users/user.controller';
 import shareFileRoutes from './files/share.routes';
 import errorHandler from './utils/error-handlers';
 import { LoggerMiddleware } from './logger';
+import { isAuthenticated } from './auth';
 
 // https://stackoverflow.com/questions/63744824/getting-express-default-is-not-a-function-error-when-i-run-node-server-in-a-co
 const app = express();
@@ -36,7 +37,7 @@ app.get('/', (req, res) => {
 });
 //
 app.use('/users', usersRoutes);
-app.use('/files', shareFileRoutes);
+app.use('/files', isAuthenticated, shareFileRoutes);
 
 // error handler
 app.use(errorHandler);
