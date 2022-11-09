@@ -15,7 +15,7 @@ const getUser = async (req, res) => {
       .status(404)
       .json({ message: 'User does not exist', status: 404 });
 
-  res.status(200).json(createDataResponse(user)).end();
+  res.status(200).json(user).end();
 };
 
 /**

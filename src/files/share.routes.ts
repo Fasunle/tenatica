@@ -1,30 +1,13 @@
 import express from 'express';
-import { storage as storageRef } from '../server';
 import localStorage from '../service/local-storage';
-import { destinationFolder } from '../utils/destination';
-import { uploadToFirebaseStorage } from '../service/uploads';
+import { getAllFiles, uploadFile } from './files.service';
 
 const route = express.Router();
 
-route.post('/upload', localStorage, (req, res) => {
-  const files: any = req.files;
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
-  }
-  for (const file of files) {
-    let destination = destinationFolder(file.filename);
-    // unsupported format
-    if (destination !== 'general' && file.name === 'delete') {
-      uploadToFirebaseStorage(storageRef, file, destination)
-        .then((uploaded) => console.log({ uploaded }))
-        .catch(console.error);
-    }
-  }
+// creating a new file
+route.post('/upload', localStorage, uploadFile);
 
-  // TODO: delete all entries after uploading all
-
-  res.json({ filename: 'nation-in-the-mud' }).end();
-  res.get('/');
-});
+// get all files shared with a user
+route.get('/', getAllFiles);
 
 export default route;

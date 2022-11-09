@@ -3,6 +3,10 @@ interface IFile {
   receiverEmail: string;
   filename: string;
   fileUrl: string;
+  contentType: string;
+  fileId: string;
+  date: string;
+  tag: string;
 }
 
 interface IUser {

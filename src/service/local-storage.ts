@@ -36,7 +36,7 @@ const storage = multer.diskStorage({
     // if not supported, flag it for deletion
     !isSupported && cb(null, 'delete');
   },
-  destination: join(__dirname, '../../temp'),
+  destination: join(__dirname, '../../public/temp'),
 });
 
 const localStorage = multer({ storage }).array('files');
