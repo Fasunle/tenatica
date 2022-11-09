@@ -1,3 +1,6 @@
+import { createDataResponse } from '../utils/response';
+import { UserModel } from '../database/user.model';
+
 /**
  * Fetch a user
  * @param req
@@ -12,8 +15,12 @@ const getUser = (req, res) => {
  * @param req
  * @param res
  */
-const createUser = (req, res) => {
-  res.json({ usename: 'Kehinde Fasunle' }).end();
+const createUser = async (req, res): Promise<{ data: ICreateUserResponse }> => {
+  // validate the payload
+  const userModel = new UserModel();
+  const user = await userModel.create(req.body);
+  if (user) return res.status(201).json(createDataResponse(user)).end();
+  res.status(400).json({ message: user }).end();
 };
 
 /**
