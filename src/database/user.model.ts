@@ -25,4 +25,26 @@ export class UserModel {
       return { message: error.message, status: error.status };
     }
   }
+
+  async getUser(id: string): Promise<IUser> {
+    try {
+      const users = await this._userModel.get();
+      let currentUser: IUser;
+
+      users.forEach((user) => {
+        if (user.data().userId === id) {
+          currentUser = {
+            email: user.data().email,
+            userId: user.data().userId,
+            username: user.data().username,
+          };
+        }
+      });
+
+      if (!currentUser) throw 'Not found';
+      return currentUser;
+    } catch (error) {
+      return null;
+    }
+  }
 }

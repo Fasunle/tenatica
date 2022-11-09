@@ -6,8 +6,16 @@ import { UserModel } from '../database/user.model';
  * @param req
  * @param res
  */
-const getUser = (req, res) => {
-  res.json({ usename: 'Kehinde Fasunle' }).end();
+const getUser = async (req, res) => {
+  const userId = (req.url as string).replace('/', '');
+  const userModel = new UserModel();
+  const user = await userModel.getUser(userId);
+  if (!user)
+    return res
+      .status(404)
+      .json({ message: 'User does not exist', status: 404 });
+
+  res.status(200).json(createDataResponse(user)).end();
 };
 
 /**
