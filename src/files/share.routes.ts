@@ -9,6 +9,7 @@ const route = express.Router();
 route.post('/upload', isAuthenticated, localStorage, uploadFile);
 
 // get all files shared with a user
+// route.get('/', getAllFiles);
 route.get('/', isAuthenticated, getAllFiles);
 
 export default route;

@@ -10,8 +10,6 @@ export const LoggerMiddleware = (req, res, next) => {
   if (process.env.NODE_ENV !== 'production') {
     console.log('\nPayload >>>>>\n');
     logger.info({
-      headers: req.headers,
-      query: req.query,
       body: req.body,
     });
   }

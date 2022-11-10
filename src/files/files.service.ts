@@ -2,7 +2,6 @@ import { storage as storageRef } from '../server';
 import { destinationFolder } from '../utils/destination';
 import { uploadToFirebaseStorage } from '../service/uploads';
 import { FileModel } from '../database/file.model';
-import { createDataResponse } from '../utils/response';
 import { join } from 'path';
 
 export const uploadFile = async (req, res) => {
@@ -59,17 +58,11 @@ export const uploadFile = async (req, res) => {
   }
 };
 
-export const getAllFiles = async (req, res) => {
-  const userEmail = req.query.userEmail;
-
-  if (!userEmail)
-    return res.status(400).send({
-      message: 'userEmail are required',
-      status: 400,
-    });
-
+export const getAllFiles = async ( req, res ) => {
+  const userEmail = req[ 'userEmail' ];
+  
   const fileModel = new FileModel();
-  const files = await fileModel.getAllFiles(userEmail);
+  const data = await fileModel.getAllFiles(userEmail);
 
-  res.status(files.status).json(createDataResponse(files));
+  res.status(data.status).send({files: data.files});
 };
