@@ -30,14 +30,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(favicon(join(__dirname, '../public', 'favicon.ico')));
 app.use('/api/public', express.static(join(__dirname, '../public')));
 app.use(LoggerMiddleware);
+
 // routes
-app.get('/', (req, res) => {
-  res.send({ message: 'All good to go!' });
-  return res.end();
-});
-//
 app.use('/users', usersRoutes);
 app.use('/files', isAuthenticated, shareFileRoutes);
+
+// home route
+app.get('/', (req, res) => {
+  res.send({
+    message: 'All good to go!',
+    endpoints: ['/files', '/users'],
+    info: 'Bearer token is required to access all these routes',
+  });
+  return res.end();
+});
 
 // error handler
 app.use(errorHandler);
