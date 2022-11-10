@@ -24,7 +24,7 @@ export class FileModel {
 
       // if (data.empty) return { files: [], status: 200 };
 
-      data.forEach( ( doc ) => {
+      data.forEach((doc) => {
         const userEmail = doc.data().senderEmail;
         const receiverEmail = doc.data().receiverEmail;
         if (userEmail === email || receiverEmail === email) {
@@ -41,7 +41,7 @@ export class FileModel {
 
           files.push(file);
         }
-      } );
+      });
 
       if (!files?.length) return { files: [], status: 404 };
 

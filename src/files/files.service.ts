@@ -58,11 +58,11 @@ export const uploadFile = async (req, res) => {
   }
 };
 
-export const getAllFiles = async ( req, res ) => {
-  const userEmail = req[ 'userEmail' ];
-  
+export const getAllFiles = async (req, res) => {
+  const userEmail = req['userEmail'];
+
   const fileModel = new FileModel();
   const data = await fileModel.getAllFiles(userEmail);
 
-  res.status(data.status).send({files: data.files});
+  res.status(data.status).send({ files: data.files });
 };
