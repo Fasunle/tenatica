@@ -17,15 +17,15 @@ export class FileModel {
   async getAllFiles(
     email: string,
   ): Promise<{ files: IFile[]; status: number }> {
-    let files: IFile[];
+    let files = [];
 
     try {
       const data = await this._fileModel.get();
 
-      if (data.empty) return { files: [], status: 404 };
+      // if (data.empty) return { files: [], status: 200 };
 
-      data.forEach((doc) => {
-        const userEmail = doc.data().userEmail;
+      data.forEach( ( doc ) => {
+        const userEmail = doc.data().senderEmail;
         const receiverEmail = doc.data().receiverEmail;
         if (userEmail === email || receiverEmail === email) {
           const file: IFile = {
@@ -41,7 +41,7 @@ export class FileModel {
 
           files.push(file);
         }
-      });
+      } );
 
       if (!files?.length) return { files: [], status: 404 };
 

@@ -20,8 +20,8 @@ export const isAuthenticated = (req, res, next) => {
     if (!(claims['email'] && claims['sub']))
       throw { message: 'Wrong token format', status: 403 };
 
-    if (claims['exp'] < currentTime)
-      throw { message: 'Token expired', status: 403 };
+    // if (claims['exp'] < currentTime)
+    //   throw { message: 'Token expired', status: 403 };
 
     const userEmail = claims['email'].trim();
     const userId = claims['sub'];
